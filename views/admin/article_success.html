@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">分类名称: {{name}}</h3>
+    </div>
+    <div class="panel-body">
+        {{message}}
+    </div>
+
+</div>
+<a href="/admin/articleIndex" class="btn btn-success">返回文章首页</a>
+{% endblock %}

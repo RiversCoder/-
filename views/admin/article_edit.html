@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+
+{% block main%}
+<ol class="breadcrumb">
+    <li><a href="/admin">管理首页</a></li>
+    <li class="active">文章管理</li>
+    <li class="active">修改文章</li>
+</ol>
+
+<form method="post" action="/admin/articleIndex/edit/articleEdit?id={{cdata._id.toString()}}">
+    <div class="form-group">
+        <label for="categoryname">请选择文章分类</label>
+        <select id="categoryname" class="form-control" name="cateId" value="">
+            {% for item in cates %}
+            <option value='{{item._id.toString()}}'>{{item.name}}</option>
+            {% endfor %}
+        </select>
+        <script type="text/javascript">
+            var categoryname = document.getElementById('categoryname');
+            var opts = categoryname.getElementsByTagName('option');
+            var id = '{{cdata.category._id.toString()}}';
+            for(var i=0;i<opts.length;i++)
+            {
+                if(id == opts[i].value)
+                {
+                    opts[i].selected = 'true';
+                }
+            }
+        </script>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">请输入文章标题</label>
+        <input type="text" class="form-control" value='{{cdata.title}}' id="exampleInputPassword1" name='article_title' placeholder="请输入文章标题">
+    </div>
+    <div class="form-group">
+        <label for="">请输入文章简介</label>
+        <textarea id="" rows="4"  class="form-control" name="article_des">{{cdata.des}}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="">请输入文章文章内容</label>
+        <textarea id="" rows="12" class="form-control" value='{{cdata.content}}' name="article_content">{{cdata.content}}</textarea>
+    </div>
+    <input type="submit" value="确定修改" class="btn btn-default" style="margin-top:20px;"/>
+</form>
+{% endblock %}
+

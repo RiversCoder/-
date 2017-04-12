@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+
+{% block left %}
+<div class="content_text">
+    <!--文章盒子-->
+    <div class="article">
+        <h3 class="a_title">{{cdata.title}}</h3>
+        <h5 class="at_line">
+            <span class="atls atl_time">时间: {{cdata.time.toUTCString()}}</span>
+            <span class="atl_author">作者: {{cdata.user.username}}</span>
+            <span class="atls atl_number">浏览量: {{cdata.views}}</span>
+        </h5>
+        <p>
+            {{cdata.content}}
+        </p>
+    </div>
+
+    <!--评论盒子-->
+    <div class="a_comment">
+        {% if userInfo.username %}
+        <!--评论框-->
+        <div class="comment_box">
+            <textarea class="textInput"></textarea>
+            <a class="textBtn" href="javascript:;" data-cid="{{}}">提交评论</a>
+        </div>
+        {% else %}
+        <!--显示登陆框-->
+        <div class="need_login_Box">你还没有登陆,请登录后再进行评价!</div>
+        {% endif %}
+    </div>
+
+    <!--评论信息展示-->
+    <div class="a_comment_con">
+        <ul id="accliBox">
+            {% for com in comments %}
+                {% if com %}
+                    <li>
+                        <p class="acbcontent">{{com.comment}}</p>
+                        {% if com.username %}
+                            <span class="acbuser">用户名:{{com.username}}</span>
+                        {% else %}
+                        <span class="acbuser">用户名:未认证</span>
+                        {% endif%}
+                        <span class="acbtimer">时间:{{com.date.toUTCString()}}</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function()
+    {
+        var textBtn = document.getElementsByClassName('textBtn')[0];
+        var textarea = document.getElementsByClassName('textInput')[0];
+        var oUl = document.getElementById('accliBox');
+        var str = location.search;
+        var cid = str.split('=')[1];
+        var arr = null;
+        var strLi = '';
+
+        textBtn.onclick = function()
+        {
+            var xhr = new XMLHttpRequest();
+            xhr.open('get','category/comment?content='+textarea.value+'&cid='+cid,true);
+            xhr.onload = function(ev)
+            {
+                arr = JSON.parse(this.response);
+                var li = document.createElement('li');
+                strLi = '<p class="acbcontent">'+arr.comment+'</p><span class="acbuser">用户名:'+arr.username+';</span><span class="acbtimer">时间:'+arr.date+'</span>';
+                li.innerHTML = strLi;
+                oUl.insertBefore(li,oUl.firstElementChild);
+            };
+            xhr.send();
+        }
+    }
+
+</script>
+{% endblock %}
+
+

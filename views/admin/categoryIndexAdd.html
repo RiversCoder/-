@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+
+{% block main%}
+    <ol class="breadcrumb">
+        <li><a href="/admin">管理首页</a></li>
+        <li class="active">分类管理</li>
+        <li class="active">分类添加</li>
+    </ol>
+
+    <form method="post" action="/admin/categoryIndexAddData">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">分类名称</span>
+            <input type="text" class="form-control" placeholder="请输入分类名称" aria-describedby="basic-addon1" name="categoryName">
+        </div>
+        <input type="submit" value="点击提交" class="btn btn-default" style="margin-top:20px;"/>
+    </form>
+{% endblock %}

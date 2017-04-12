@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+
+{% block left %}
+<div class="s_tuijian">
+    <h2>我的<span>文章</span></h2>
+</div>
+<div class="content_text">
+
+    <!--wz-->
+    {% for item in data %}
+    <div class="wz">
+        <h3><a href="/?pid={{item._id.toString()}}" title="{{item.title}}">{{item.title}}</a></h3>
+        <dl>
+            <dt><img src="public/images/s.jpg" width="200" height="123" alt=""></dt>
+            <dd>
+                <p class="dd_text_1">{{item.des}}</p>
+                <p class="dd_text_2">
+                    <span class="left author">{{item.user.username}}</span><span class="left sj"> {{item.time.toUTCString()}}</span>
+                    <span class="left fl">分类: <a href="#" title="学无止境">{{item.category.name}}</a></span><span class="left yd"><a href="/?pid={{item._id.toString()}}" title="阅读全文">阅读全文</a>
+               </span>
+                <div class="clear"></div>
+                </p>
+            </dd>
+            <div class="clear"></div>
+        </dl>
+    </div>
+    {% endfor %}
+    <!--wz end-->
+</div>
+
+{% endblock %}

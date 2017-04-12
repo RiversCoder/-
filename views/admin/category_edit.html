@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+
+{% block main%}
+<ol class="breadcrumb">
+    <li><a href="/admin">管理首页</a></li>
+    <li class="/admin/">分类首页</li>
+    <li class="active">编辑分类</li>
+</ol>
+
+<form method="post" action="/admin/categoryIndex/editform">
+    <h5>当前分类名称: {{name}}</h5>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">分类名称</span>
+        <input type="text" class="form-control" placeholder="请输入要修改的分类名称" aria-describedby="basic-addon1" name="changeName">
+    </div>
+    <input type="submit" value="确定修改" class="btn btn-default" style="margin-top:20px;"/>
+</form>
+{% endblock %}

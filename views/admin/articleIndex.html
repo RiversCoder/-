@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/admin">管理首页</a></li>
+    <li class="active">文章管理</li>
+    <li class="active">文章首页</li>
+</ol>
+
+<h3>分类信息</h3>
+<table class="table table-hover text-center">
+    <tr class="active">
+        <td class="col-md-1">ID</td>
+        <td class="col-md-1">文章标题</td>
+        <td class="col-md-1">分类</td>
+        <td class="col-md-1">时间</td>
+        <td class="col-md-1">作者</td>
+        <td class="col-md-1">阅读量</td>
+        <td class="col-md-1">文章操作</td>
+    </tr>
+
+    {% for item in dataInfo%}
+    <tr>
+        <td class="success">{{item._id.toString()}}</td>
+        <td class="warning">{{item.title}}</td>
+        <td class="primary">{{item.category.name}}</td>
+        <td class="info">{{item.time.toString().slice(0,-14)}}</td>
+        <td class="warning">{{item.user.username}}</td>
+        <td class="success">{{item.views}}</td>
+        <td class="danger"><a href="/admin/articleIndex/edit?id={{item._id.toString()}}">修改</a> | <a href="/admin/articleIndex/edit/articleRemove?id={{item._id.toString()}}">删除</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% include 'page_model.html' %}
+
+
+
+{% endblock %}

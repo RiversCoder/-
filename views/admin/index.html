@@ -1,0 +1,13 @@
+{% extends 'layout.html' %} <!--导入layout.html的内容-->
+
+
+
+
+
+{% block main%} <!--在layout.html 对应的block main div盒子里添加内容-->
+<div class="jumbotron">
+    <h1>Hello, {{userInfo.username}}!</h1>
+    <p>...</p>
+    <p><a class="btn btn-primary btn-lg" href="javascript:;" role="button">Welcome</a></p>
+</div>
+{% endblock %}

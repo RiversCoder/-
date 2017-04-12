@@ -1,0 +1,33 @@
+{% extends 'layout.html'%}
+
+
+
+{% block main%}
+    <ol class="breadcrumb">
+        <li><a href="/admin/">管理首页</a></li>
+        <li class="active">用户管理</li>
+    </ol>
+    <h3>用户信息</h3>
+    <table class="table table-hover text-center">
+        <tr class="active">
+            <td class="col-md-3">ID</td>
+            <td class="col-md-3">用户名</td>
+            <td class="col-md-3">密码</td>
+            <td class="col-md-3">是否为管理员</td>
+        </tr>
+
+        {% for item in dataInfo%}
+            <tr>
+                <td class="success">{{item._id.toString()}}</td>
+                <td class="warning">{{item.username}}</td>
+                <td class="danger">{{item.password}}</td>
+                <td class="info">
+                    {% if item.isAdmin%}是{%else%}否{%endif%}
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% include 'page_model.html'%}
+{% endblock %}

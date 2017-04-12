@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+
+{% block main%}
+<ol class="breadcrumb">
+    <li><a href="/admin">管理首页</a></li>
+    <li class="active">文章管理</li>
+    <li class="active">文章添加</li>
+</ol>
+
+<form method="post" action="/admin/articleIndexAddData">
+    <div class="form-group">
+        <label for="categoryname">请选择文章分类</label>
+        <select id="categoryname" class="form-control" name="cateId">
+            {% for item in cates %}
+            <option value='{{item._id.toString()}}'>{{item.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">请输入文章标题</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" name='article_title' placeholder="请输入文章标题">
+    </div>
+    <div class="form-group">
+        <label for="">请输入文章简介</label>
+        <textarea id="" rows="4" class="form-control" name="article_des"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="">请输入文章文章内容</label>
+        <textarea id="" rows="12" class="form-control" name="article_content"></textarea>
+    </div>
+    <input type="submit" value="点击提交" class="btn btn-default" style="margin-top:20px;"/>
+</form>
+{% endblock %}
